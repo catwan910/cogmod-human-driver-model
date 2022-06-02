@@ -4,7 +4,6 @@ import os
 
 from lib import ClientUser, LoggerFactory, MapManager, MapNames, SimulationVisualization, Utils, SimulationMode
 from research import *
-# from research.SimulationMode import SimulationMode
 from research.ResearchCogMod import ResearchCogMod
 from research.ResearchStraightRoadSimulation import ResearchStraightRoadSimulation
 
