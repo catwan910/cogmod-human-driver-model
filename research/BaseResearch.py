@@ -1,11 +1,18 @@
 from abc import abstractmethod
+import logging
 import carla
 import os
 from lib import ClientUser, LoggerFactory, MapManager, MapNames, SimulationVisualization, NotImplementedInterface, SimulationMode
 # from lib.SimulationMode import SimulationMode
 
 class BaseResearch(ClientUser):
-    def __init__(self, name, client: carla.Client, mapName, logLevel, outputDir:str = "logs", simulationMode = SimulationMode.ASYNCHRONOUS) -> None:
+    def __init__(self, 
+                 name: str, 
+                 client: carla.Client, 
+                 mapName: MapNames, 
+                 logLevel: logging, 
+                 outputDir:str, 
+                 simulationMode: SimulationMode):
         super().__init__(client)
 
         self.name = name

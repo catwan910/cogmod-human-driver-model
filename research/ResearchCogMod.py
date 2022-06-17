@@ -1,3 +1,4 @@
+import logging
 import math
 import time
 from unittest import result
@@ -15,12 +16,14 @@ from lib import Utils
 
 class ResearchCogMod(BaseResearch):
 
-    def __init__(self, client: carla.Client, 
-                 logLevel, 
-                 mapName=MapNames.t_junction, 
-                 outputDir:str = "logs", 
-                 simulationMode = SimulationMode.ASYNCHRONOUS,
-                 simulation_id = "setting1"):
+    def __init__(self, 
+                 client: carla.Client, 
+                 logLevel: logging, 
+                 mapName: MapNames, 
+                 outputDir:str, 
+                 simulationMode: SimulationMode,
+                 act_id: str):
+
         self.name = "Research CogMod"
         super().__init__(name=self.name, 
                          client=client, 
@@ -29,43 +32,34 @@ class ResearchCogMod(BaseResearch):
                          outputDir=outputDir,
                          simulationMode=simulationMode)
 
-    
 
-        # self.simulation_id = simulation_id
+        self.simulation_id = act_id
 
-        # self.settingsManager = SettingsManager(self.client, t_junction_settings)
-        # self.vehicleFactory = VehicleFactory(self.client, visualizer=self.visualizer)
+        self.settingsManager = SettingsManager(self.client, t_junction_settings)
+        self.vehicleFactory = VehicleFactory(self.client, visualizer=self.visualizer)
 
-        # self.number_of_cogmod_agents = 0
-        # self.number_of_actor_agents = 0
+        self.cogmod_agent_setting = {}
+        self.actor_agent_setting = {}
 
+        self.cogmod_agent = None
+        self.actor_agent = None
 
-        # self.vehicle_list = []
-        # self.cogmod_agent_list = []
-        # self.actor_agent_list = []
-
-        # self.cogmod_agent_parameter_list = []
-        # self.actor_trajectory_list = []
+        self.global_agent_list = []
         
-        # self.setup()
+        self.setup()
 
 
-    # def setup(self):
-    #     self.settingsManager.load(self.simulation_id)
-    #     self.simulator = None # populated when run
-    #     self.number_of_cogmod_agents, self.cogmod_agent_parameter_list = self.settingsManager.getNumberOfCogmodAgentsWithParameters()
-    #     self.number_of_actor_agents, self.actor_trajectory_list = self.settingsManager.getNumberOfActorAgentsWithTrajectories()
+    def setup(self):
+        self.settingsManager.load(self.simulation_id)
+        self.simulator = None # populated when run
+        self.number_of_cogmod_agents, self.cogmod_agent_parameter_list = self.settingsManager.getNumberOfCogmodAgentsWithParameters()
+        self.number_of_actor_agents, self.actor_trajectory_list = self.settingsManager.getNumberOfActorAgentsWithTrajectories()
         
 
-    #     self.visualizer.drawSpawnPoints()
+        self.visualizer.drawSpawnPoints()
 
-    #     # unique_lanes = {}
-    #     # for wp in self.mapManager.waypoints:
-    #     #     if wp.lane_id not in unique_lanes:
-    #     #         unique_lanes[wp.lane_id] = True
-    #     # print(f'unique roads {unique_lanes}')
 
-    #     pass
+        pass
 
     # def onEnd(self):
     #     self.destoryActors()

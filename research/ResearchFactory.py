@@ -47,14 +47,14 @@ class ResearchFactory:
         return research
     
     @staticmethod
-    def createResearchCogMod(maxTicks=100, 
-                             host="127.0.0.1", 
-                             port=2000, 
-                             defaultLogLevel=logging.INFO, 
-                             output_dir="logs", 
-                             map=MapNames.straight_road_with_parking, 
-                             simulationMode=SimulationMode.ASYNCHRONOUS,
-                             simulation_id='setting1'):
+    def createResearchCogMod(maxTicks: int, 
+                             host: str, 
+                             port: int, 
+                             defaultLogLevel: logging, 
+                             output_dir: str, 
+                             map: MapNames, 
+                             simulationMode: SimulationMode,
+                             act_id: str):
 
         print(f"research chosen : CogMod with host: {host}, port: {port}, log level: {defaultLogLevel}, output directory: {output_dir}")
         port = int(port)
@@ -62,25 +62,11 @@ class ResearchFactory:
         logPath = os.path.join(output_dir, f"{name}.log")
         logger = LoggerFactory.getBaseLogger(name, defaultLevel=defaultLogLevel, file=logPath)
         client = Utils.createClient(logger, host, port)
-        research = ResearchCogMod(client, defaultLogLevel, map, output_dir, simulationMode, simulation_id)
-        research.run(maxTicks=maxTicks)
+        research = ResearchCogMod(client=client, 
+                                  logLevel=logger, 
+                                  mapName=map, 
+                                  outputDir=output_dir, 
+                                  simulationMode=simulationMode,
+                                  act_id=act_id)
+        # research.run(maxTicks=maxTicks)
     
-    @staticmethod
-    def createResearchCogMod1(host="127.0.0.1", 
-                              port=2000,
-                              defaultLogLevel=logging.INFO,
-                              output_dir="logs",
-                              maxTicks=100,
-                              map=MapNames.straight_road_with_parking,
-                              act_id="setting1"
-                              ):
-
-        print(f"research chosen : CogMod with host: {host}, port: {port}, log level: {defaultLogLevel}, output directory: {output_dir}")
-        port = int(port)
-        name = "ResearchCogMod1"
-        logPath = os.path.join(output_dir, f"{name}.log")
-        logger = LoggerFactory.getBaseLogger(name, defaultLevel=defaultLogLevel, file=logPath)
-        client = Utils.createClient(logger, host, port)
-        research = ResearchCogMod(client, defaultLogLevel, map, output_dir, maxTicks, act_id)
-
-        print('research cogmod 1')
