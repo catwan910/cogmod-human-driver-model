@@ -1,19 +1,23 @@
-import click
-from research import ResearchFactory, SimulationMode
+# from prompt_toolkit import prompt
+from research import ResearchFactory
+from lib import MapNames
+import research
+import logging
 
-@click.command()
-@click.option(        
-    '--max_ticks',
-    metavar='number',
-    default=2000,
-    type=int,
-    help='Number of ticks the simulator will run'
-    )
-def ResearchCogMod(max_ticks):
-    research = ResearchFactory.createResearchCogMod(maxTicks=max_ticks, 
-                                                    simulationMode=SimulationMode.SYNCHRONOUS, 
-                                                    simulation_id='setting1')
+
+def ResearchCogMod(max_ticks=100):
+
+    host = "127.0.0.1"
+    port = 2000
+    defaultLogLevel = logging.INFO
+    output_dir = "logs"
+    map = MapNames.straight_road_with_parking
+    simulation_id = 'setting1'
+
+    research = ResearchFactory.createResearchCogMod1()
 
 
 if __name__ == '__main__':
-    ResearchCogMod()
+    ResearchCogMod(100)
+
+
