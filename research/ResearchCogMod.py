@@ -8,7 +8,7 @@ from lib.MapManager import MapNames
 
 from .BaseResearch import BaseResearch
 from settings.t_junction_settings import t_junction_settings
-from settings import SettingsManager
+from settings.ExtendedSettingsManager import CogModSettingsManager
 from agents.pedestrians import PedestrianFactory
 from agents.vehicles import VehicleFactory
 from lib import Simulator, SimulationMode
@@ -33,9 +33,10 @@ class ResearchCogMod(BaseResearch):
                          simulationMode=simulationMode)
 
 
-        self.simulation_id = act_id
+        self.act_id = act_id
+        self.simulator = None # populated when run
 
-        self.settingsManager = SettingsManager(self.client, t_junction_settings)
+        self.settingsManager = CogModSettingsManager(self.client, t_junction_settings)
         self.vehicleFactory = VehicleFactory(self.client, visualizer=self.visualizer)
 
         self.cogmod_agent_setting = {}
@@ -50,13 +51,13 @@ class ResearchCogMod(BaseResearch):
 
 
     def setup(self):
-        self.settingsManager.load(self.simulation_id)
-        self.simulator = None # populated when run
-        self.number_of_cogmod_agents, self.cogmod_agent_parameter_list = self.settingsManager.getNumberOfCogmodAgentsWithParameters()
-        self.number_of_actor_agents, self.actor_trajectory_list = self.settingsManager.getNumberOfActorAgentsWithTrajectories()
-        
+        self.settingsManager.load(self.act_id)
+        self.cogmod_agent_setting, self.actor_agent_setting, self.trigger_distance = self.settingsManager.getStraightRoadSimulationSettings()
 
-        self.visualizer.drawSpawnPoints()
+        self.logger.info(f"CogMod agent settings: {self.cogmod_agent_setting}")
+        self.logger.info(f"Actor agent settings: {self.actor_agent_setting}")
+
+        # self.visualizer.drawSpawnPoints()
 
 
         pass

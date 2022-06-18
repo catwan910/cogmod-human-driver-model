@@ -1,3 +1,4 @@
 from .circular_t_junction_settings import circular_t_junction_settings
 from .SourceDestinationPair import SourceDestinationPair
 from .SettingsManager import SettingsManager
+from .ExtendedSettingsManager import CogModSettingsManager

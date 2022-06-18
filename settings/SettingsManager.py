@@ -1,7 +1,6 @@
 import carla
 import logging
 
-from matplotlib import transforms
 from lib.ClientUser import ClientUser
 from .SourceDestinationPair import SourceDestinationPair
 from typing import List
