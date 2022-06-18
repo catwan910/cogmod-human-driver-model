@@ -122,3 +122,6 @@ class SettingsManager(ClientUser):
                 self._walkerTransforms.append((sourceTransform, destination))
 
         return self._walkerTransforms
+    
+    def convertCoordinateToTransform(self, coordinate):
+        return self.locationToVehicleSpawnPoint(self._pointToLocation(coordinate))
