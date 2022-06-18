@@ -7,7 +7,8 @@ import carla
 from lib.MapManager import MapNames
 
 from .BaseResearch import BaseResearch
-from settings.t_junction_settings import t_junction_settings
+# from settings.t_junction_settings import t_junction_settings
+from settings.straight_road_settings import straight_road_settings
 from settings.ExtendedSettingsManager import CogModSettingsManager
 from agents.pedestrians import PedestrianFactory
 from agents.vehicles import VehicleFactory
@@ -36,7 +37,7 @@ class ResearchCogMod(BaseResearch):
         self.act_id = act_id
         self.simulator = None # populated when run
 
-        self.settingsManager = CogModSettingsManager(self.client, t_junction_settings)
+        self.settingsManager = CogModSettingsManager(self.client, straight_road_settings)
         self.vehicleFactory = VehicleFactory(self.client, visualizer=self.visualizer)
 
         self.cogmod_agent_setting = {}

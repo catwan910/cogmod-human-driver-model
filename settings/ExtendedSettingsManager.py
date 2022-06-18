@@ -10,7 +10,7 @@ class CogModSettingsManager(SettingsManager):
     def getStraightRoadSimulationSettings(self):
 
         # cogmod agent settings
-        cogmod_agent_settings = self.currentSetting["cogmod_agents"]
+        cogmod_agent_settings = self.currentSetting["cogmod_agent"]
     
         cogmod_spawn_coordinate= cogmod_agent_settings["spawn_point"]
         cogmod_destination_coordinate = cogmod_agent_settings["destination_point"] 
