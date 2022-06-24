@@ -13,6 +13,7 @@ import carla
 from enum import Enum
 from shapely.geometry import Polygon
 
+
 from agents.navigation.local_planner import LocalPlanner
 from agents.navigation.global_route_planner import GlobalRoutePlanner
 from agents.tools.misc import get_speed, is_within_distance, get_trafficlight_trigger_location, compute_distance
@@ -78,6 +79,12 @@ class BasicAgent(object):
             self.debug = opt_dict['debug']
 
 
+    def get_vehicle(self):
+        return self._vehicle
+
+    def get_global_plan(self):
+        return self._local_planner._waypoints_queue
+        
     def add_emergency_stop(self, control):
         """
         Overwrites the throttle a brake values of a control to perform an emergency stop.
