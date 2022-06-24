@@ -13,6 +13,7 @@ from .qnactr_enum import SubtaskType, ServerType
 
 
 
+
 class CogModAgent():
     def __init__(self, id, vehicle, destination_point, driver_profile):
         if vehicle is None:
@@ -63,7 +64,11 @@ class CogModAgent():
 
 
         self.subtasks_queue = [self.lane_keeping_task, self.lane_following_task]
+        pass
 
+
+    def get_vehicle(self):
+        return self.vehicle
 
     def set_local_map(self):
         local_map = LocalMap(self.vehicle, self.destination_point,
@@ -261,7 +266,7 @@ class CogModAgent():
     def update_local_map(self, global_agent_list):
         other_agents = []
         for agent in global_agent_list:
-            if agent.id != self.id:
+            if agent.get_vehicle().id != self.vehicle.id:
                 other_agents.append(agent)
 
         self.local_map.update(other_agents)
