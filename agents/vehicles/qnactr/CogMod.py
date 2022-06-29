@@ -34,8 +34,8 @@ class CogModAgent():
         self.complete_map = self.world.get_map() 
 
         # set local map 
-        print(f'vehicle location {self.vehicle.get_location()}')
-        print(f'destination point: {self.destination_point}')
+        # print(f'vehicle location {self.vehicle.get_location()}')
+        # print(f'destination point: {self.destination_point}')
         self.local_map = self.set_local_map()
 
         # set servers cognitive servers
@@ -225,8 +225,8 @@ class CogModAgent():
             req = subtask.get_request()
             for request in req:
                 ret.append(request)
-        for request in ret:
-            print(str(request))
+        # for request in ret:
+        #     print(str(request))
         return ret
 
 

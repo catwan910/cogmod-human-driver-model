@@ -39,16 +39,16 @@ class BaseCognitiveServer(ABC):
         pass
 
 
-    def print_request_queue_stats(self):
-        lane_keeping_request_count = 0
-        lane_following_request_count = 0
-        for request in self.request_queue:
-            if request.sender == SubtaskType.LANEFOLLOWING:
-                lane_following_request_count += 1
-            if request.sender == SubtaskType.LANEKEEPING:
-                lane_keeping_request_count += 1
-        print(f'lane_following_request_count: {lane_following_request_count}')
-        print(f'lane_keeping_request_count: {lane_keeping_request_count}')
-        pass
+    # def print_request_queue_stats(self):
+    #     lane_keeping_request_count = 0
+    #     lane_following_request_count = 0
+    #     for request in self.request_queue:
+    #         if request.sender == SubtaskType.LANEFOLLOWING:
+    #             lane_following_request_count += 1
+    #         if request.sender == SubtaskType.LANEKEEPING:
+    #             lane_keeping_request_count += 1
+    #     print(f'lane_following_request_count: {lane_following_request_count}')
+    #     print(f'lane_keeping_request_count: {lane_keeping_request_count}')
+    #     pass
 
 
