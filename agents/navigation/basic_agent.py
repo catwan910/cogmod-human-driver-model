@@ -78,6 +78,7 @@ class BasicAgent(Agent):
         if "debug" in opt_dict:
             self.debug = opt_dict['debug']
 
+
     def get_vehicle(self):
         return self._vehicle
 
