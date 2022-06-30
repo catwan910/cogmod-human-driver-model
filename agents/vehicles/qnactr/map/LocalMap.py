@@ -127,10 +127,10 @@ class LocalMap():
 
         min_distance = 9999
         for agent in follow_agent:
-            distance = self.vehicle.get_location().distance(agent.vehicle.get_location())
+            distance = self.vehicle.get_location().distance(agent.get_vehicle().get_location())
             if distance < min_distance:
                 min_distance = distance
-                self.vehicle_at_front = agent.vehicle
+                self.vehicle_at_front = agent.get_vehicle()
                 # print('setting vehuicle at front ')
                 pass
 
@@ -210,7 +210,7 @@ class LocalMap():
         copy_tracked_vehicles = self.tracked_agents.copy()
         
         for agent, interaction_type in copy_tracked_vehicles.items():
-            distance = self.vehicle.get_location().distance(agent.vehicle.get_location())
+            distance = self.vehicle.get_location().distance(agent.get_vehicle().get_location())
             if distance > self.vehicle_tracking_radius:
                 del self.tracked_agents[agent]
                 pass
