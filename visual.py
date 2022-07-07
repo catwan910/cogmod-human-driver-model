@@ -12,8 +12,17 @@ def ResearchVisual():
     port = 2000
     defaultLogLevel = logging.INFO
     output_dir = "logs"
-    map = MapNames.t_junction
+    map = MapNames.straight_road_with_parking
     simulationMode = SimulationMode.ASYNCHRONOUS
+
+    research = ResearchFactory.createResearchVisual(maxTicks=max_ticks,
+                                                    host=host,
+                                                    port=port,
+                                                    defaultLogLevel=defaultLogLevel,
+                                                    output_dir=output_dir,
+                                                    map=map,
+                                                    simulationMode=simulationMode)
+
 
     
 

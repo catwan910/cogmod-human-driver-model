@@ -4,6 +4,7 @@ import os
 
 from lib import ClientUser, LoggerFactory, MapManager, MapNames, SimulationVisualization, Utils, SimulationMode
 from research import *
+from research.ResearchVisual import ResearchVisual
 # from research.SimulationMode import SimulationMode
 from research.ResearchCogMod import ResearchCogMod
 
@@ -16,8 +17,7 @@ class ResearchFactory:
         pass
 
     @staticmethod
-    def createResearch1v1(
-                            maxTicks=100, 
+    def createResearch1v1(maxTicks=100, 
                             host="127.0.0.1", 
                             port=2000, 
                             defaultLogLevel=logging.INFO, 
@@ -82,14 +82,15 @@ class ResearchFactory:
     
             print(f"research chosen : Visual with host: {host}, port: {port}, log level: {defaultLogLevel}, output directory: {output_dir}")
             port = int(port)
-            name = "ResearchVisual"
-            # logPath = os.path.join(output_dir, f"{name}.log")
-            # logger = LoggerFactory.getBaseLogger(name, defaultLevel=defaultLogLevel, file=logPath)
-            # client = Utils.createClient(logger, host, port)
-            # research = ResearchVisual(client=client, 
-            #                         logLevel=logger, 
-            #                         mapName=map, 
-            #                         outputDir=output_dir, 
-            #                         simulationMode=simulationMode)
-            # research.run(maxTicks=maxTicks)
+            name = "Research Visual"
+            logPath = os.path.join(output_dir, f"{name}.log")
+            logger = LoggerFactory.getBaseLogger(name, defaultLevel=defaultLogLevel, file=logPath)
+            client = Utils.createClient(logger, host, port)
+            research = ResearchVisual(name,
+                                      client=client, 
+                                      logLevel=logger, 
+                                      mapName=map, 
+                                      outputDir=output_dir, 
+                                      simulationMode=simulationMode)
+            
     
