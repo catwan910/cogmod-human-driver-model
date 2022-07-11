@@ -80,17 +80,17 @@ class ResearchFactory:
                              map: MapNames, 
                              simulationMode: SimulationMode):
     
-            print(f"research chosen : Visual with host: {host}, port: {port}, log level: {defaultLogLevel}, output directory: {output_dir}")
-            port = int(port)
-            name = "Research Visual"
-            logPath = os.path.join(output_dir, f"{name}.log")
-            logger = LoggerFactory.getBaseLogger(name, defaultLevel=defaultLogLevel, file=logPath)
-            client = Utils.createClient(logger, host, port)
-            research = ResearchVisual(name,
-                                      client=client, 
-                                      logLevel=logger, 
-                                      mapName=map, 
-                                      outputDir=output_dir, 
-                                      simulationMode=simulationMode)
+        print(f"research chosen : Visual with host: {host}, port: {port}, log level: {defaultLogLevel}, output directory: {output_dir}")
+        port = int(port)
+        name = "Research Visual"
+        logPath = os.path.join(output_dir, f"{name}.log")
+        logger = LoggerFactory.getBaseLogger(name, defaultLevel=defaultLogLevel, file=logPath)
+        client = Utils.createClient(logger, host, port)
+        research = ResearchVisual(name,
+                                  client=client, 
+                                  logLevel=logger, 
+                                  mapName=map, 
+                                  outputDir=output_dir, 
+                                  simulationMode=simulationMode)
             
     
