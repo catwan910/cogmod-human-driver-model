@@ -58,7 +58,7 @@ class ResearchFactory:
 
         print(f"research chosen : CogMod with host: {host}, port: {port}, log level: {defaultLogLevel}, output directory: {output_dir}")
         port = int(port)
-        name = "ResearchCogMod"
+        name = "Research CogMod"
         logPath = os.path.join(output_dir, f"{name}.log")
         logger = LoggerFactory.getBaseLogger(name, defaultLevel=defaultLogLevel, file=logPath)
         client = Utils.createClient(logger, host, port)
