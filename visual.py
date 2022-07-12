@@ -14,6 +14,7 @@ def ResearchVisual():
     output_dir = "logs"
     map = MapNames.straight_road_with_parking
     simulationMode = SimulationMode.ASYNCHRONOUS
+    act_id = 'setting1'
 
     research = ResearchFactory.createResearchVisual(maxTicks=max_ticks,
                                                     host=host,
@@ -21,7 +22,8 @@ def ResearchVisual():
                                                     defaultLogLevel=defaultLogLevel,
                                                     output_dir=output_dir,
                                                     map=map,
-                                                    simulationMode=simulationMode)
+                                                    simulationMode=simulationMode,
+                                                    act_id=act_id)
 
 
     

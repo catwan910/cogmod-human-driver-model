@@ -1,20 +1,21 @@
-from asyncio.log import logger
+# from asyncio.log import logger
 import logging
-import math
-from random import random
-import time
-from unittest import result
+# import math
+from random import choice
+# import time
+# from unittest import result
 import carla
 
 from lib.MapManager import MapNames
-from lib.SimulationVisualization import SimulationVisualization
+# from lib.SimulationVisualization import SimulationVisualization
 
 from .BaseResearch import BaseResearch
+
 from settings.ExtendedSettingsManager import CogModSettingsManager
-from agents.pedestrians import PedestrianFactory
+from settings.visual_setting import visual_settings
 from agents.vehicles import VehicleFactory
 from lib import Simulator, SimulationMode
-from lib import Utils
+# from lib import Utils
 
 class ResearchVisual(BaseResearch):
     def __init__(self, name: str, 
@@ -22,7 +23,8 @@ class ResearchVisual(BaseResearch):
                  mapName: MapNames, 
                  logLevel: logging, 
                  outputDir: str, 
-                 simulationMode: SimulationMode):
+                 simulationMode: SimulationMode,
+                 act_id: str):
         self.name = 'Research Visual'
         super().__init__(name, 
                          client, 
@@ -30,44 +32,68 @@ class ResearchVisual(BaseResearch):
                          logLevel, 
                          outputDir, 
                          simulationMode)
-        
 
-        self.spawnLocation = (-55, 11)
-        self.spawnLocation = self.convert_coordinates_to_transform(self.spawnLocation)
+        self.act_id = act_id
+        self.simulator = None
 
-        self.vehicle = self.spawn_vehicle(self.spawnLocation)
-
-        self.visualizer = SimulationVisualization(self.client, self.mapManager)
-
-        self.visualizer.drawPoint(location=self.vehicle.get_location(), size=1, life_time=100)
-
-
-        
-
-        
-
-    def draw_circle(self):
-
-        pass
-    def spawn_vehicle(self, location):
-        # print(location)
+        self.settingsManager = CogModSettingsManager(self.client, visual_settings)  
         self.vehicleFactory = VehicleFactory(self.client, visualizer=self.visualizer)
-        vehicle = self.vehicleFactory.spawn(location)
-        return vehicle
-        pass
+
+        self.cogmod_agent_settings = {}
+        self.static_elements_settings = []
+
+        self.cogmod_agent = None
+        self.static_element_list = []
+
+        # self.bpLib = self.world.get_blueprint_library()
+        # self.staticBps = self.bpLib.filter('static.prop.barrel')
+        self.setup()
+
+
+
+    def setup(self):
+        self.settingsManager.load(self.act_id)
+        self.cogmod_agent_settings, self.static_elements_settings = self.settingsManager.getVisualModuleSettings()
+
+        # spawn_points = self.map.get_spawn_points()
+        # increment = 3
+        # start_valX = -100
+
+        # for Bps in self.staticBps:
+        #     start_valX = start_valX + increment
+        #     start = carla.Location(x=-start_valX, y=8, z=1)
+        #     start_transform = carla.Transform(start, carla.Rotation(0, 0, 0))
+        #     static_elem  = self.world.spawn_actor(Bps, start_transform)
+
+
+
+
+
+
+        # for spawn_point in spawn_points:
+        #     staticBp = choice(self.staticBps)
+        #     static_elem  = self.world.spawn_actor(staticBp, spawn_point)
         
 
-    def convert_coordinates_to_transform(self, coordinates, z = 0.0):
 
-        location = carla.Location(x = coordinates[0], y = coordinates[1], z = z)
 
-        waypoint = self.map.get_waypoint(location, project_to_road=True, lane_type=carla.LaneType.Driving)
-        if waypoint is None:
-            msg = f"{self.name}: Cannot create way point near {location}"
-            self.error(msg)
-        transform = carla.Transform(location = waypoint.transform.location + carla.Location(z=1), rotation = waypoint.transform.rotation)
+        # for Bps in self.staticBps:
+        #     if Bps.has_attribute('role_name'):
+        #         print('has attribute ', Bps.id)
+            # print('role name ', Bps.role_name)
+
+        # self.cogmod_agent_settings, self.static_elements_settings = self.settingsManager.getVisualModuleSettings()
+
         
-        return transform
+        
+        
+        
+
+        
+        
+
+        
+
 
         
         

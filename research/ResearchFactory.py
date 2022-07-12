@@ -78,7 +78,8 @@ class ResearchFactory:
                              defaultLogLevel: logging, 
                              output_dir: str, 
                              map: MapNames, 
-                             simulationMode: SimulationMode):
+                             simulationMode: SimulationMode,
+                             act_id: str):
     
         print(f"research chosen : Visual with host: {host}, port: {port}, log level: {defaultLogLevel}, output directory: {output_dir}")
         port = int(port)
@@ -91,6 +92,7 @@ class ResearchFactory:
                                   logLevel=logger, 
                                   mapName=map, 
                                   outputDir=output_dir, 
-                                  simulationMode=simulationMode)
+                                  simulationMode=simulationMode,
+                                  act_id=act_id)
             
     
