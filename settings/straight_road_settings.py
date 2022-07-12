@@ -18,7 +18,7 @@ straight_road_settings = {
         "cogmod_agent": {
             "spawn_point": (30, 13), #(-55, 8),
             "destination_point": (-60, 12), #(150, 8),
-            "driver_profile": driver_profile["DOM"],
+            "driver_profile": driver_profile["driver3"],
             # speed 30
         },
         'actor_agent': {
