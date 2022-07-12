@@ -30,7 +30,6 @@ class ResearchVisual(BaseResearch):
                          logLevel, 
                          outputDir, 
                          simulationMode)
-        print('research visual')
         
 
         self.spawnLocation = (-55, 11)
