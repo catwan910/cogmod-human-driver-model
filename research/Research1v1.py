@@ -100,7 +100,7 @@ class Research1v1(BaseResearch):
         self.vehicle = None
         self.vehicleAgent = None
         self.vehicleSetting = self.getVehicleSetting()
-        self.vehicleSpawnPoint = self.settingsManager.locationToVehicleSpawnPoint(self.vehicleSetting.source)
+        self.vehicleSpawnPoint = self.settingsManager.locationToVehicleSpawnTransform(self.vehicleSetting.source)
         self.vehicleDestination = self.vehicleSetting.destination
 
         self.simulator = None # populated when run
