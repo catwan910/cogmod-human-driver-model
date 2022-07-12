@@ -49,7 +49,7 @@ class SettingsManager(ClientUser):
         return location
 
     
-    def locationToVehicleSpawnPoint(self, location: carla.Location) -> carla.Transform:
+    def locationToVehicleSpawnTransform(self, location: carla.Location) -> carla.Transform:
 
         # find a way point
         waypoint = self.map.get_waypoint(location, project_to_road=True, lane_type=carla.LaneType.Driving)
@@ -61,6 +61,13 @@ class SettingsManager(ClientUser):
         # print(transform)
         # exit(1)
         return transform
+
+    # the rotation of the trnasform is set to carla default rotation
+    def convertPointToTransform(self, point):
+        location = self._pointToLocation(point)
+        transform = carla.Transform(location = location, rotation = carla.Rotation(0, 0, 0))
+        return transform
+        pass
 
 
     # def getEgoSpawnpoint(self) -> carla.Transform:
@@ -123,5 +130,5 @@ class SettingsManager(ClientUser):
 
         return self._walkerTransforms
     
-    def convertCoordinateToTransform(self, coordinate):
-        return self.locationToVehicleSpawnPoint(self._pointToLocation(coordinate))
+    def convertVehicleCoordinateToTransform(self, coordinate):
+        return self.locationToVehicleSpawnTransform(self._pointToLocation(coordinate))
