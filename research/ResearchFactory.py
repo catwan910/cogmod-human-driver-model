@@ -94,5 +94,6 @@ class ResearchFactory:
                                   outputDir=output_dir, 
                                   simulationMode=simulationMode,
                                   act_id=act_id)
+        research.run(maxTicks=maxTicks)
             
     
