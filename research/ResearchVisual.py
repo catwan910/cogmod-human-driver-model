@@ -87,6 +87,16 @@ class ResearchVisual(BaseResearch):
             print('control is None')
         pass
 
+    def updateSpectator(self, world_snapshot):
+        spectator = self.world.get_spectator()
+        vehicle_location = self.cogmod_agent.get_vehicle().get_location()
+        spectator_location = carla.Location(vehicle_location.x, 
+                                            vehicle_location.y, 
+                                            50)
+        spectator.set_transform(carla.Transform(spectator_location, carla.Rotation(pitch=-90)))
+        
+        pass
+
     def onEnd(self):
         self.logger.info('onEnd: destroying all static elements and cogmod agent')
         self.destroyAll()
@@ -104,7 +114,7 @@ class ResearchVisual(BaseResearch):
         self.world.wait_for_tick()
         time.sleep(1)
 
-        onTickers = [self.onTick]
+        onTickers = [self.onTick, self.updateSpectator]
         onEnders = [self.onEnd]
 
         self.simulator = Simulator(self.client, 
