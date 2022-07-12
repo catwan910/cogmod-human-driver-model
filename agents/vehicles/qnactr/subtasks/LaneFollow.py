@@ -10,7 +10,6 @@ from ..qnactr_enum import SubtaskState, SubtaskType
 
 class LaneFollow():
     def __init__(self, localMap):
-        print('LaneFollow __init__()')
 
         self.tick_frequency = 1
         self.tick_counter = 0

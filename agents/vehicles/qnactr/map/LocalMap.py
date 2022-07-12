@@ -55,7 +55,7 @@ class LocalMap():
                 pass
             
         
-        print(f'road dict {road_dict}')
+        # print(f'road dict {road_dict}')
         return road_list
 
 
@@ -64,7 +64,7 @@ class LocalMap():
         start_transform = self.vehicle.get_transform()
         if not start_transform or not end_transform:
             raise ValueError('need to have start and end for global plan')
-        print(f'start transform: {start_transform}, \nend transform: {end_transform}')
+        # print(f'start transform: {start_transform}, \nend transform: {end_transform}')
         return self.global_planner.trace_route(start_transform.location, end_transform.location)
         pass
 

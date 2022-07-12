@@ -19,7 +19,7 @@ from ..qnactr_enum import ServerType, SubtaskState, SubtaskType
 
 class LaneKeeping():
     def __init__(self, localMap):
-        print(f'LaneKeeping.__init__()')
+
         self.tick_frequency = 1
         self.tick_counter = 0
 
