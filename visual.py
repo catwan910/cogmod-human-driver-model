@@ -7,7 +7,7 @@ from lib.SimulationMode import SimulationMode
 
 
 def ResearchVisual():
-    max_ticks = 100
+    max_ticks = 5000
     host = "127.0.0.1"
     port = 2000
     defaultLogLevel = logging.INFO
