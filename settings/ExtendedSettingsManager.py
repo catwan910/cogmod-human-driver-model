@@ -22,8 +22,8 @@ class CogModSettingsManager(SettingsManager):
         actor_spawn_coordinate = actor_agent_settings["spawn_point"]
         actor_destination_coordinate = actor_agent_settings["destination_point"]
 
-        actor_spawn_transform = self.convertCoordinateToTransform(actor_spawn_coordinate)
-        actor_destination_transform = self.convertCoordinateToTransform(actor_destination_coordinate)
+        actor_spawn_transform = self.convertVehicleCoordinateToTransform(actor_spawn_coordinate)
+        actor_destination_transform = self.convertVehicleCoordinateToTransform(actor_destination_coordinate)
 
         actor_agent_settings = {
             "spawn_transform": actor_spawn_transform,
@@ -41,8 +41,8 @@ class CogModSettingsManager(SettingsManager):
         cogmod_spawn_coordinate= cogmod_agent_settings["spawn_point"]
         cogmod_destination_coordinate = cogmod_agent_settings["destination_point"] 
 
-        cogmod_spawn_transform = self.convertCoordinateToTransform(cogmod_spawn_coordinate)
-        cogmod_destination_transform = self.convertCoordinateToTransform(cogmod_destination_coordinate)
+        cogmod_spawn_transform = self.convertVehicleCoordinateToTransform(cogmod_spawn_coordinate)
+        cogmod_destination_transform = self.convertVehicleCoordinateToTransform(cogmod_destination_coordinate)
 
         cogmod_agent_settings = {
             "spawn_transform": cogmod_spawn_transform,
@@ -64,7 +64,7 @@ class CogModSettingsManager(SettingsManager):
         types = static_element_settings["types"]
         static_element_settings = []
         for i in range(len(spawn_points)):
-            spawn_transform = self.convertCoordinateToTransform(spawn_points[i])
+            spawn_transform = self.convertPointToTransform(spawn_points[i])
             static_element_settings.append((spawn_transform, types[i]))
 
         return static_element_settings
