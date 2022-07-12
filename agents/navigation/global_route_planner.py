@@ -143,8 +143,8 @@ class GlobalRoutePlanner(object):
         seg_dict['entryxyz'], seg_dict['exitxyz'] = (x1, y1, z1), (x2, y2, z2)
         seg_dict['path'] = []
 
-        for wp in wps:
-            print("_build_topology_singleRoad: wp", wp)
+        # for wp in wps:
+        #     print("_build_topology_singleRoad: wp", wp)
 
         
         endloc = last.transform.location
