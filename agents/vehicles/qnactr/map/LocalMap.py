@@ -1,13 +1,32 @@
 from enum import Enum
+import carla
+from ..qnactr_enum import GazeDirection
 from turtle import distance
 from agents.navigation.global_route_planner import GlobalRoutePlanner
 from .GeometryHelper import GeometryHelper
+from lib import utils
 
 class InteractionType(Enum):
     FOLLOW = 1
     CROSS = 2
     MERGE = 3
     NONCONFLICT = 4
+
+# dictionary with the settings of the gaze behavior
+# key = gaze direction
+# value = (direction angle, view angle, length, triangle_color)) ;
+#  direction angle is the angle with the vehicle front
+
+Gaze_Settings = {
+    GazeDirection.CENTER: (0, 90, 20, utils.red),
+    GazeDirection.LEFT:  (70, 90, 10, utils.green),
+    GazeDirection.RIGHT:  (-70, 90, 10, utils.blue),
+    GazeDirection.LEFTBLINDSPOT:  (130, 30, 5, utils.green),
+    GazeDirection.RIGHTBLINDSPOT:  (-130, 30, 5, utils.blue),
+    GazeDirection.LEFTMIRROR:  (160, 20, 20, utils.green),
+    GazeDirection.RIGHTMIRROR:  (-160, 20, 20, utils.blue),
+    GazeDirection.BACK:  (179, 25, 20, utils.red),
+}
 
 
 class LocalMap():
@@ -75,11 +94,14 @@ class LocalMap():
         return self.global_plan
 
     # 
-    def update(self, global_agent_list):
+    def update(self, global_agent_list, gazeDirection):
         
         # update global plan. discarding the waypoints that are 
         # behind the vehicle's nearest waypoint's 's value' (openDrive)
         self.update_global_plan()
+
+        # find the gaze triangle from gaze direction and settings
+        self.find_gaze_triangle(gazeDirection)
 
         # update tracked vehicles
         self.update_tracked_agents(global_agent_list)
@@ -94,6 +116,41 @@ class LocalMap():
         # return current_map_dict
 
 
+    def find_gaze_triangle(self, gazeDirection):
+        if gazeDirection not in Gaze_Settings.keys():
+            raise ValueError('need to have gaze direction')
+            return
+        gaze_settings = Gaze_Settings[gazeDirection]
+        
+        debug = self.vehicle.get_world().debug
+        vehicle_transform = self.vehicle.get_transform()
+        vehicle_center = vehicle_transform.location
+        vehicle_center = carla.Location(x=vehicle_center.x, y=vehicle_center.y, z=2)
+
+        # vehicle_front = vehicle_transform.get_forward_vector()
+        # vehicle_front = carla.Location(x=vehicle_front.x, y=vehicle_front.y, z=2)
+
+        # print('gaze settings ', gaze_settings)
+        # # front_end = vehicle_center + vehicle_front * 10
+        
+        # self.gaze_direction = GeometryHelper.find_gaze_triangle(self.vehicle, gaze_settings)
+
+        points = GeometryHelper.find_gaze_triangle(self.vehicle, gaze_settings)
+
+        # debug.draw_line(begin=vehicle_center, 
+        #                 end=front_end,
+        #                 thickness=0.5,
+        #                 color=carla.Color(255, 0, 0),
+        #                 life_time=1.0)
+        for i in range(len(points)):
+            debug.draw_line(begin=points[i], 
+                            end=points[(i+1)%3],
+                            thickness=0.2,
+                            color=gaze_settings[3],
+                            life_time=1.0)
+        
+
+        pass
 
     def update_traffic_signs(self):
         if len(self.tracked_traffic_signs) == 0:

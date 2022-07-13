@@ -1,4 +1,5 @@
 from enum import Enum
+from tkinter import CENTER, LEFT, RIGHT
 
 
 class RequestType(Enum):
@@ -29,5 +30,19 @@ class SubtaskType(Enum):
     HAZARD_DETECTION = 2
     INTERSECTION_CROSSING = 3
     REQULATORY = 4
+    pass
+
+class GazeDirection(Enum):
+    """
+    The gaze direction.
+    """
+    CENTER = 0              # 0.5
+    LEFT = 1                # 0.1
+    RIGHT = 2               # 0.1
+    LEFTBLINDSPOT = 3       # 0.04
+    RIGHTBLINDSPOT = 4      # 0.04
+    LEFTMIRROR = 5          # 0.08
+    RIGHTMIRROR = 6         # 0.08
+    BACK = 7                # 0.06
     pass
 
