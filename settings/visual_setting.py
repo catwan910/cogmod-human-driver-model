@@ -33,8 +33,8 @@ from .driver_profile import driver_profile
 visual_settings = {
     "setting1": {
         "cogmod_agent": {
-            "spawn_point": (-55, 11), #(-55, 8),
-            "destination_point": (200, 11), #(150, 8),
+            "spawn_point": (-55, 11), 
+            "destination_point": (50, 11), 
             "driver_profile": driver_profile["driver3"],
             # speed 30
         },
